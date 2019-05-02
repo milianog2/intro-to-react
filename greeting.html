@@ -1,27 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>My First React App</title>
+    <title>My First React app</title>
   </head>
   <body>
-     <div id="app"></div>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
-     <script type="text/babel">
-     class Greeting extends React.Component {
-       render() {
-         return (
-           <div>
-             <h1>Hello World!</h1>
-           </div>
-         );
-       }
-     }
 
-     ReactDOM.render(
-       <Greeting />, document.getElementById('app')
-     );
-     </script>
+    <div id="app"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <script type="text/babel">
+       class DeleteButton extends React.Component {
+         constructor() {
+           super();
+
+           this.state = {
+             text: 'Food'
+           }
+
+           this.handleClick = this.handleClick.bind(this);
+         }
+
+         handleClick() {
+           const textItem = ['Hamburger', 'Hotdogs', 'Fries', 'Soda']
+           const text = textItem[Math.floor(Math.random() * ((textItem.length - 1) - 0 + 1)) + 0];
+
+           this.setState({
+             text: `${this.props.message} ${text}`
+           })
+         }
+
+         render() {
+           return (
+             <div>
+               <button onClick={this.handleClick}>{this.state.text}</button>
+             </div>
+           )
+         }
+       }
+
+       const Sample = (props) => {
+         return (
+           <h1>{props.text}</h1>
+         )
+       }
+
+       class Greeting extends React.Component {
+         render() {
+           return (
+             <div>
+               <h1>Food I Like, Love & Hate!</h1>
+               <DeleteButton message="I like" />
+               <DeleteButton message="I love" />
+               <DeleteButton message="I hate" />
+             </div>
+           );
+         }
+       }
+
+       ReactDOM.render(
+         <Greeting />, document.getElementById('app')
+       );
+    </script>
   </body>
 </html>
